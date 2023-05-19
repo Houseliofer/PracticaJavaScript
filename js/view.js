@@ -72,14 +72,17 @@ export default class View {
     this.model.toggleCompleted(id);
   }
 
-  editTodo(id, values,newDeadline) {
+  editTodo(id, values, newDeadline) {
     this.model.editTodo(id, values);
     const row = document.getElementById(id);
     row.children[0].innerText = values.title;
     row.children[1].innerText = values.description;
-    row.children[2].children[0].checked = values.completed;
-    this.model.editTodo(id, values, newDeadline);
+    const deadlineInput = row.querySelector('input[type="date"]');
+    deadlineInput.value = newDeadline;
+    row.children[3].children[0].checked = values.completed;
   }
+  
+  
 
   removeTodo(id) {
     this.model.removeTodo(id);
