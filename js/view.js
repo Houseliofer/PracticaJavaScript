@@ -62,7 +62,7 @@ export default class View {
   addTodo(title, description) {
     const deadlineInput = document.getElementById('deadline');
     const deadline = deadlineInput.value;
-    const todo = this.model.addTodo(title, description, deadline);
+    const todo = this.model.addTodo(title, description,deadline);
     this.createRow(todo);
     deadlineInput.value = ''; // Limpiar el campo después de agregar la tarea
   }
@@ -95,7 +95,7 @@ export default class View {
     row.innerHTML = `
       <td>${todo.title}</td>
       <td>${todo.description}</td>
-      <td>${todo.deadline}</td>
+      <!--<td>${todo.deadline}</td>-->
       <td class="text-center">
 
       </td>
@@ -133,7 +133,7 @@ export default class View {
     deadlineInput.value = todo.deadline; // Establecer el valor inicial de la fecha de vencimiento
     deadlineInput.onchange = (event) => {
       const newDeadline = event.target.value;
-      this.updateDeadline(todo.id, newDeadline);
+      this.model.editTodo(todo.id, {deadline: newDeadline});
     };
     row.children[2].appendChild(deadlineInput);
   }
